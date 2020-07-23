@@ -1,0 +1,30 @@
+Trigger Practice
+Date:22-07-2020
+============
+Before Insert:
+Helper class:
+public class BeforeInsertHelperclass {
+    public static void beforeInsertAccount(list<Account> acclist){
+        for(Account a:acclist){
+            if(a.Industry =='Banking'){
+                a.phone='1122';
+            }
+        }
+    }
+}
+
+triggerHandler:
+trigger AccountHandler on Account (before insert) {
+	BeforeInsertHelperclass.beforeInsertAccount(trigger.new);
+}
+Test Class:
+@isTest
+public class TestbeforeAccountInsert {
+ @isTest
+    public static void testme(){
+        Account acc= new Account();
+        acc.Industry='Banking';
+        acc.phone='1234';
+        insert acc;
+    }
+}
